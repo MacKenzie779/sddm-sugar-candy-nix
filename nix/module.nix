@@ -373,17 +373,17 @@ in
         type = types.str;
       };
 
-      TranslateReboot = = mkOption {
+      TranslateReboot = mkOption {
         default = "";
         type = types.str;
       };
 
-      TranslateShutdown = = mkOption {
+      TranslateShutdown = mkOption {
         default = "";
         type = types.str;
       };
 
-      TranslateVirtualKeyboardButton = = mkOption {
+      TranslateVirtualKeyboardButton = mkOption {
         default = "";
         type = types.str;
       };

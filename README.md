@@ -1,1 +1,1 @@
-/usr/share/sddm/themes/sugar-candy
+NixOS flake for my sddm-sugar-candy theme

@@ -37,24 +37,9 @@ in
   options.services.xserver.displayManager.sddm.sugarCandyNix = {
     enable = mkEnableOption "SDDM Sugar Candy Theme";
 
-    # package = mkOption {
-    #   default = defaultPackage;
-    #   defaultText = literalExpression ''
-    #
-    #   '';
-    #   example = literalExpression "pkgs.sddm-sugar-candy-nix";
-    #   description = mdDoc ''
-    #     The SDDM Sugar Candy Theme to use.
-    #     Setting this option will make
-    #     {option}`services.xserver.displayManager.sddm.sugarCandy.settings` not
-    #     work.
-    #   '';
-    #   type = types.path;
-    # };
-
     settings = {
       Background = mkOption {
-        default = ../Backgrounds/mountain2.jpg;
+        default = ../Backgrounds/mountain3.jpg;
         description = ''Set the theme background. Must be a path.
         Most standard image file formats are allowed including support for transparency. (e.g. background.jpeg/illustration.GIF/Foto.png/undraw.svgz)"
         '';

@@ -24,7 +24,8 @@ with lib; let
     strings.concatStrings ( [ "[General]\n\n" ] ++ configStrings );
 
   # Theme configuration file after generation
-  theme-conf-file = pkgs.writeText "sddm-sugar-candy-nix.conf";
+  theme-conf-file = pkgs.writeText "sddm-sugar-candy-nix.conf" (mkThemeConf
+    cfg.settings);
 
   # Final Package
   defaultPackage =
@@ -51,7 +52,7 @@ in
     #   type = types.path;
     # };
 
-/*     settings = {
+    settings = {
       Background = mkOption {
         default = ../Backgrounds/Mountain.jpg;
         example = ../Backgrounds/Mountain.jpg;
@@ -375,7 +376,7 @@ in
 
       TranslateVirtualKeyboardButton = mkTranslationOption "the virtual
       keyboard button" "Clavier virtuel";
-    }; */
+    };
   };
 
   config = lib.mkIf cfg.enable {

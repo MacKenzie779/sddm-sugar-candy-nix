@@ -39,7 +39,7 @@ in
 
     settings = {
       Background = mkOption {
-        default = ../Backgrounds/mountain3.jpg;
+        default = ../Backgrounds/tuxOnWindows.jpg;
         description = ''Set the theme background. Must be a path.
         Most standard image file formats are allowed including support for transparency. (e.g. background.jpeg/illustration.GIF/Foto.png/undraw.svgz)"
         '';

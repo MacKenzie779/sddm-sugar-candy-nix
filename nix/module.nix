@@ -54,8 +54,7 @@ in
 
     settings = {
       Background = mkOption {
-        default = ../Backgrounds/Mountain.jpg;
-        example = ../Backgrounds/Mountain.jpg;
+        default = ../Backgrounds/mountain2.jpg;
         description = ''Set the theme background. Must be a path.
         Most standard image file formats are allowed including support for transparency. (e.g. background.jpeg/illustration.GIF/Foto.png/undraw.svgz)"
         '';
@@ -64,14 +63,12 @@ in
 
       DimBackgroundImage = mkOption {
         default = 0.0;
-        example = 0.5;
         description = "Float between 0 and 1 used for the alpha channel of a darkening overlay. Use to darken your background image on the fly.";
         type = types.float;
       };
 
       ScaleImageCropped = mkOption {
         default = true;
-        example = false;
         description = ''
         Whether the image should be cropped when scaled proportionally.
         Setting this to false will fit the whole image instead, possibly leaving white space.
@@ -82,23 +79,23 @@ in
 
       ScreenWidth = mkOption {
         default = 1440;
-        example = 1920;
         description = "Adjust to your resolution to help SDDM speed up on calculations.";
         type = types.int;
       };
 
       ScreenHeight = mkOption {
         default = 900;
-        example = 1080;
         description = "Adjust to your resolution to help SDDM speed up on calculations.";
         type = types.int;
       };
 
-      FullBlur = mkEnableOption "full Blur effect";
+      FullBlur = mkOption {
+        default = false;
+        type = types.bool;
+      }; 
 
       PartialBlur = mkOption {
-        default = false;
-        example = true;
+        default = true;
         description = ''
           Wether to enable the partial blur effect.
           If HaveFormBackground is enabled then PartialBlur will trigger the
@@ -110,7 +107,6 @@ in
 
       BlurRadius = mkOption {
         default = 100;
-        example = 0;
         description = "Set the strength of the blur effect. Anything above 100
         is pretty strong and might slow down the rendering time. 0 is like
         setting false for any blur.";
@@ -119,7 +115,6 @@ in
 
       HaveFormBackground = mkOption {
         default = false;
-        example = true;
         description = ''
           Have a full opacity background color behind the form that takes
           slightly more than 1/3 of screen estate.
@@ -131,8 +126,7 @@ in
       };
 
       FormPosition = mkOption {
-        default = "center";
-        example = "left";
+        default = "left";
         description = "Position of the form which takes roughly 1/3 of screen
         estate. Can be left, center or right.";
         type = types.enum [ "center" "left" "right" ];
@@ -140,7 +134,6 @@ in
 
       BackgroundImageHAlignment = mkOption {
         default = "center";
-        example = "right";
         description = "Horizontal position of the background picture relative to
         its visible area. Applies when ScaleImageCropped is set to false or when
         HaveFormBackground is set to true and FormPosition is either left or
@@ -151,7 +144,6 @@ in
 
       BackgroundImageVAlignment = mkOption {
         default = "center";
-        example = "right";
         description = "Vertical position of the background picture relative to
         its visible area. Applies when ScaleImageCropped is set to false or when
         HaveFormBackground is set to true and FormPosition is either left or
@@ -162,7 +154,6 @@ in
 
       MainColor = mkOption {
         default = "white";
-        example = "#444";
         description = literalMD ''
           Used for all elements when not focused/hovered etc. Usually the best
           effect is achieved by having this be either white or a very dark grey
@@ -174,8 +165,7 @@ in
       };
 
       AccentColor = mkOption {
-        default = "#fb884f";
-        example = "#38f8dd";
+        default = "#4FA1FB";
         description = "Used for elements in focus/hover/pressed. Should be
         contrasting to the background and the MainColor to achieve the best
         effect.";
@@ -184,7 +174,6 @@ in
 
       BackgroundColor = mkOption {
         default = "#444";
-        example = "#adfddd";
         description = "Used for the user and session selection background as
         well as for ScreenPadding and FormBackground when either is true. If
         PartialBlur and FormBackground are both enabled this color will blend
@@ -194,7 +183,6 @@ in
 
       OverrideLoginButtonTextColor = mkOption {
         default = "";
-        example = "#ffffff";
         description = "The text of the login button may become difficult to read
         depending on your color choices. Use this option to set it independently
         for legibility.";
@@ -203,7 +191,6 @@ in
 
       InterfaceShadowSize = mkOption {
         default = 6;
-        example = 3;
         description = "Integer used as multiplier. Size of the shadow behind the
         user and session selection background. Decrease or increase if it looks
         bad on your background. Initial render can be slow for values above
@@ -213,7 +200,6 @@ in
 
       InterfaceShadowOpacity = mkOption {
         default = 0.6;
-        example = 0.1;
         description = "Float between 0 and 1. Alpha channel of the shadow
         behind the user and session selection background. Decrease or increase
         if it looks bad on your background.";
@@ -222,7 +208,6 @@ in
 
       RoundCorners = mkOption {
         default = 20;
-        example = 10;
         description = "Integer in pixels. Radius of the input fields and the
         login button. Empty for square. Can cause bad antialiasing of the
         fields.";
@@ -231,7 +216,6 @@ in
 
       ScreenPadding = mkOption {
         default = 0;
-        example = 10;
         description = "Integer in pixels. Increase or set this to 0 to have a
         padding of color BackgroundColor all around your screen. This makes your
         login greeter appear as if it was a canvas.";
@@ -240,7 +224,6 @@ in
 
       Font = mkOption {
         default = "Noto Sans";
-        example = "Fira Code";
         description = "Select a custom font. Must be installed globally in your
         Nix configuration.";
         type = types.nonEmptyStr;
@@ -248,7 +231,6 @@ in
 
       FontSize = mkOption {
         default = "";
-        example = "14";
         description = "Only set a fixed value if fonts are way too small for
         your resolution. Preferrably kept empty.";
         type = types.str;
@@ -256,7 +238,6 @@ in
 
       ForceRightToLeft = mkOption {
         default = false;
-        example = true;
         description = "Revert the layout either because you would like the login
         to be on the right hand side or SDDM won't respect your language locale
         for some reason. This will reverse the current position of FormPosition
@@ -268,7 +249,6 @@ in
 
       ForceLastUser = mkOption {
         default = true;
-        example = false;
         description = "Have the last successfully logged in user appear
         automatically in the username field.";
         type = types.bool;
@@ -276,15 +256,13 @@ in
 
       ForcePasswordFocus = mkOption {
         default = true;
-        example = false;
         description = "Give automatic focus to the password field. Together with
         forceLastUser this makes for the fastest login experience.";
         type = types.bool;
       };
 
       ForceHideCompletePassword = mkOption {
-        default = false;
-        example = true;
+        default = true;
         description = "If you don't like to see any character at all not even
         while being entered set this to true.";
         type = types.bool;
@@ -292,7 +270,6 @@ in
 
       ForceHideVirtualKeyboardButton = mkOption {
         default = false;
-        example = true;
         description = "Do not show the button for the virtual keyboard at all.
         This will completely disable functionality for the virtual keyboard even
         if it is installed and activated in sddm.conf";
@@ -301,15 +278,23 @@ in
 
       ForceHideSystemButtons = mkOption {
         default = false;
-        example = true;
         description = "Completely disable and hide any power buttons on the
         greeter.";
         type = types.bool;
       };
 
+      AllowEmptyPassword = mkOption {
+        default = false;
+        type = types.bool;
+      };
+
+      AllowBadUsernames = mkOption {
+        default = false;
+        type = types.bool;
+      };
+
       Locale = mkOption {
         default = "";
-        example = "fr";
         description = "The time and date locale should usually be set in your
         system settings. Only hard set this if something is not working by
         default or you want a seperate locale setting in your login screen.";
@@ -317,8 +302,7 @@ in
       };
 
       HourFormat = mkOption {
-        default = "HH:mm";
-        example = "HH:mm:ss";
+        default = "HH:mm:ss";
         description = literalMD ''
           Defaults to Locale.ShortFormat - Accepts "long"
           or a custom string like "hh:mm A". See
@@ -328,8 +312,7 @@ in
       };
 
       DateFormat = mkOption {
-        default = "dddd, d of MMMM";
-        example = "dddd";
+        default = "dddd, d of MMMM yyyy";
         description = literalMD ''
           Defaults to Locale.LongFormat - Accepts "short" or a custom string
           like "dddd, d 'of' MMMM". See
@@ -339,43 +322,71 @@ in
       };
 
       HeaderText = mkOption {
-        default = "Welcome!";
-        example = "Bienvenue!";
+        default = "";
         description = "Header can be empty to not display any greeting at all.
         Keep it short.";
         type = types.str;
       };
 
-      TranslatePlaceholderUsername = mkTranslationOption "the username
-      placeholder" "Nom d'utilisateur";
+      TranslatePlaceholderUsername = mkOption {
+        default = "";
+        type = types.str;
+      };
 
-      TranslatePlaceholderPassword = mkTranslationOption " the password
-      placeholder" "Mot de passe";
+      TranslatePlaceholderPassword = mkOption {
+        default = "";
+        type = types.str;
+      };
 
-      TranslateShowPassword = mkTranslationOption "show password" "Afficher le
-      mot de passe";
+      TranslateShowPassword = mkOption {
+        default = "";
+        type = types.str;
+      };
 
-      TranslateLogin = mkTranslationOption "login" "Connexion";
+      TranslateLogin = mkOption {
+        default = "";
+        type = types.str;
+      };
 
-      TranslateLoginFailedWarning = mkTranslationOption "the login failed warning"
-      "Echec de l'authentification";
+      TranslateLoginFailedWarning = mkOption {
+        default = "";
+        type = types.str;
+      };
 
-      TranslateCapslockWarning = mkTranslationOption "the caps lock warning"
-      "Verr. Maj. actif";
+      TranslateCapslockWarning = mkOption {
+        default = "";
+        type = types.str;
+      };
 
-      TranslateSession = mkTranslationOption "the session button" "Session";
+      TranslateSession = mkOption {
+        default = "";
+        type = types.str;
+      };
 
-      TranslateSuspend = mkTranslationOption "the suspend button" "Suspendre";
+      TranslateSuspend = mkOption {
+        default = "";
+        type = types.str;
+      };
 
-      TranslateHibernate = mkTranslationOption "the hibernate button"
-      "Hibernation";
+      TranslateHibernate = mkOption {
+        default = "";
+        type = types.str;
+      };
 
-      TranslateReboot = mkTranslationOption "the reboot button" "Redémarrer";
+      TranslateReboot = = mkOption {
+        default = "";
+        type = types.str;
+      };
 
-      TranslateShutdown = mkTranslationOption "the shutdown button" "Arrêt";
+      TranslateShutdown = = mkOption {
+        default = "";
+        type = types.str;
+      };
 
-      TranslateVirtualKeyboardButton = mkTranslationOption "the virtual
-      keyboard button" "Clavier virtuel";
+      TranslateVirtualKeyboardButton = = mkOption {
+        default = "";
+        type = types.str;
+      };
     };
   };
 
